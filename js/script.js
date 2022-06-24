@@ -1,24 +1,24 @@
-// | prendo il parent nel DOM
+// | prendo i parent nel DOM
 
 const gridContainer = document.getElementById('grid-container');
-
 const difficultyContainer = document.getElementById('difficultySelected');
-
 const generatorButton = document.getElementById('generator');
 
-generateGrid(1);
 
+generateGrid(1);
 
 // | creo un bottone che mi permette di aggiornare la griglia
 generatorButton.addEventListener('click', function() {
     generateGrid(getSelectValue());
+});
 
+gridContainer.children.addEventListener('click', function() {
+    checkIfYouHaveClickedABomb();
 });
 
 // Ciclo per il numero di difficoltà che voglio generare
 for (let i = 0; i < 3; i++) {
     const newDifficulty = createNewDifficulty(i + 1);
-    addEventListenerForDifficulty(newDifficulty);
     difficultyContainer.append(newDifficulty);
 }
 
@@ -91,15 +91,6 @@ function createNewDifficulty(difficultyNumber) {
     return currentDifficulty;
 }
 
-
-function addEventListenerForDifficulty(htmlElement) {
-
-    htmlElement.addEventListener('click', function() {
-        htmlElement.classList.toggle("selection");
-    });
-}
-// console.log(`è stata cliccata la cella numero ${cellNumber}`);
-
 function addEventListenerWithToggle(htmlElement, classToToggle, cellNumber) {
     htmlElement.addEventListener('click', function() {
         htmlElement.classList.toggle(classToToggle);
@@ -111,25 +102,6 @@ function createNewSquare(difficultyValue) {
     currentSquare.classList.add(`square${difficultyValue}`);
     return currentSquare;
 }
-
-// // funzione: prende blacklist, prende il valore minimo, il valore massimo inclusi
-// function generateUniqueRandomNumber(blackList, min, max) {
-//     let newRandomNumber;
-//     let isNumberValid = false;
-
-//     // finché il numero trovato non è valido
-//     while (isNumberValid === false) {
-//         // genera un nuovo numero randomico nell'intervallo min-max
-//         newRandomNumber = Math.floor(Math.random() * (max + 1) - min) + min;
-
-//         // se non è già presente in blacklist || ovvero che il numero è nuovo e valido
-//         if (!blackList.includes(newRandomNumber)) {
-//             // usciamo dal ciclo
-//             isNumberValid = true;
-//         }
-//     }
-//     return newRandomNumber;
-// }
 
 // Operatore ternario:
 // § condizione ? valoreSeLaCondizioneÈVera : valoreSeLaCondizioneÈFalsa;

@@ -34,7 +34,7 @@ div.square {
     text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: #011627;
 }
 
 div.square1 {
@@ -48,7 +48,7 @@ div.square1 {
     text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: #011627;
 }
 
 div.square2 {
@@ -62,7 +62,7 @@ div.square2 {
     text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: #011627;
 }
 
 div.square3 {
@@ -76,7 +76,7 @@ div.square3 {
     text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: #011627;
 }
 
 div#grid-container,
