@@ -4,16 +4,14 @@ const gridContainer = document.getElementById('grid-container');
 const difficultyContainer = document.getElementById('difficultySelected');
 const generatorButton = document.getElementById('generator');
 
+let movesDone = 1;
+let bombNumber = 16;
 
 generateGrid(1);
 
 // | creo un bottone che mi permette di aggiornare la griglia
 generatorButton.addEventListener('click', function() {
     generateGrid(getSelectValue());
-});
-
-gridContainer.children.addEventListener('click', function() {
-    checkIfYouHaveClickedABomb();
 });
 
 // Ciclo per il numero di difficoltà che voglio generare
@@ -32,7 +30,7 @@ function generateBombs(numberOfSquares, start) {
     let i = 0;
 
     // finché il numero trovato non è valido
-    while (bombList.length < 16) {
+    while (bombList.length < bombNumber) {
         // genera un nuovo numero randomico nell'intervallo min-max
         newRandomNumber = Math.floor(Math.random() * (numberOfSquares + 1) - start) + start;
 
@@ -51,6 +49,9 @@ function generateBombs(numberOfSquares, start) {
 function generateGrid(difficultyValue) { // | ciclo per il numero di quadrati che voglio generare
 
     document.getElementById('grid-container').innerHTML = "";
+    movesDone = 1;
+    const message = document.getElementById('message');
+    message.innerHTML = ``;
     const gridContainer = document.getElementById('grid-container');
     let bombList = []; // | creo una lista vuota, che sarà la lista delle bombe ritornate
     switch (getSelectValue()) {
@@ -77,7 +78,41 @@ function generateGrid(difficultyValue) { // | ciclo per il numero di quadrati ch
     }
 }
 
+function checkIfYouHaveClickedABomb(element) { // | ciclo per il numero di quadrati che voglio generare
 
+    console.log(movesDone)
+    const message = document.getElementById('message');
+    if (element.classList.contains('bombed'))
+        message.innerHTML = `Hai perso dopo ${movesDone} click`;
+    else {
+        if (isAlreadyClicked(element) == false) {
+            if ((getSelectValue() == '1' && movesDone == (100 - bombNumber)) || (getSelectValue() == '2' && movesDone == (81 - bombNumber)) || (getSelectValue() == '3' && movesDone == (49 - bombNumber))) {
+                message.innerHTML = `Hai vinto`;
+                console.log("Hai vinto")
+            } else {
+                movesDone += 1;
+            }
+        }
+    }
+}
+
+function isAlreadyClicked(element) {
+    if (!element.classList.contains('already-clicked')) {
+        element.classList.add('already-clicked');
+        return false;
+    } else {
+        return true;
+    }
+
+}
+
+function addEventListenerWithToggle(htmlElement, classToToggle, cellNumber) {
+    htmlElement.addEventListener('click', function() {
+        htmlElement.classList.toggle(classToToggle);
+        checkIfYouHaveClickedABomb(htmlElement);
+
+    });
+}
 
 function getSelectValue() {
     var selectedValue = document.getElementById("difficultySelected").value;
@@ -89,12 +124,6 @@ function createNewDifficulty(difficultyNumber) {
     currentDifficulty.innerText = `Difficoltà ${difficultyNumber}`;
     currentDifficulty.value = difficultyNumber;
     return currentDifficulty;
-}
-
-function addEventListenerWithToggle(htmlElement, classToToggle, cellNumber) {
-    htmlElement.addEventListener('click', function() {
-        htmlElement.classList.toggle(classToToggle);
-    });
 }
 
 function createNewSquare(difficultyValue) {
