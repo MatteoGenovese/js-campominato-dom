@@ -93,9 +93,9 @@ div.square3.cyaned {
     color: #011627;
 }
 
-div.square1.bomb,
-div.square2.bomb,
-div.square3.bomb {
+div.square1.bombed,
+div.square2.bombed,
+div.square3.bombed {
     background-color: red;
     color: #011627;
 }

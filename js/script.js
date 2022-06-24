@@ -44,11 +44,7 @@ function generateBombs(numberOfSquares, start) {
         }
     }
 
-    console.log(bombList);
-    // currentBlackList.push(i); // | e lo aggiungo alla blacklist
-    // return newRandomNumber;
-
-
+    return bombList;
 
 }
 
@@ -56,7 +52,7 @@ function generateGrid(difficultyValue) { // | ciclo per il numero di quadrati ch
 
     document.getElementById('grid-container').innerHTML = "";
     const gridContainer = document.getElementById('grid-container');
-    const bombList = []; // | creo una lista vuota, che sarà la lista delle bombe ritornate
+    let bombList = []; // | creo una lista vuota, che sarà la lista delle bombe ritornate
     switch (getSelectValue()) {
         default: numberOfSquares = 100;
         case '1':
@@ -69,15 +65,16 @@ function generateGrid(difficultyValue) { // | ciclo per il numero di quadrati ch
                 numberOfSquares = 49;
             break;
     }
+    bombList = generateBombs(numberOfSquares, 0);
 
     for (let i = 0; i < numberOfSquares; i++) {
         const newSquare = createNewSquare(difficultyValue); // # creo un nuovo quadrato con le classi relative
-        newSquare.innerHTML = i;
-        let className = (i % 2 === 0) ? 'cyaned' : 'redned'; // ! in base al valore di parità del numero randomico unico appena generato assegnerò un toggle con classi diverse
+        let squareValue = (bombList.includes(i)) ? 'bomb' : i;
+        newSquare.innerHTML = squareValue;
+        let className = (squareValue === 'bomb') ? 'bombed' : 'cyaned'; // ! in base al valore di parità del numero randomico unico appena generato assegnerò un toggle con classi diverse
         addEventListenerWithToggle(newSquare, className, i);
         gridContainer.append(newSquare); // § aggiungo il nuovo quadrato al parent
     }
-    generateBombs(numberOfSquares, 0);
 }
 
 
