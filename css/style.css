@@ -37,7 +37,7 @@ div.square {
     color: white;
 }
 
-div.square3 {
+div.square1 {
     float: left;
     width: calc(100% / 10);
     height: calc(100% / 10);
@@ -65,7 +65,7 @@ div.square2 {
     color: white;
 }
 
-div.square1 {
+div.square3 {
     float: left;
     width: calc(100% / 7);
     height: calc(100% / 7);
@@ -93,10 +93,10 @@ div.square3.cyaned {
     color: #011627;
 }
 
-div.square1.redned,
-div.square2.redned,
-div.square3.redned {
-    background-color: #ff008c;
+div.square1.bomb,
+div.square2.bomb,
+div.square3.bomb {
+    background-color: red;
     color: #011627;
 }
 
