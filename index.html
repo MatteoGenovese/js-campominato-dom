@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Griglia Dinamica</title>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+    <!-- Importing custom css stylesheet -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- <nav>
+        <div class="form-group">
+            <label for="difficultySelect">Seleziona difficoltà</label>
+            <select class="form-control" id="difficultySelect">
+            </select>
+        </div>
+    </nav> -->
+
+    <div class="form-group">
+        <label for="difficultySelected">Seleziona difficoltà</label>
+        <select id="difficultySelected" class="form-control" onchange="getSelectValue();">
+        </select>
+    </div>
+
+
+
+    <button type="button" class="btn btn-primary" id="generator">Play</button>
+
+    <main>
+        <div id="grid-container" class="clearfix">
+            <!-- punto di inserimento dinamico dei nostri quadrati -->
+        </div>
+    </main>
+
+
+    <!--  ? JS importato esternamente -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/script.js"></script>
+</body>
+
+</html>

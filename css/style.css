@@ -1,0 +1,111 @@
+/* RESET */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+body {
+    background-color: #011627;
+    font-family: 'Anek Latin', sans-serif;
+}
+
+main {
+    margin-top: 3rem;
+    padding: 1.5rem;
+}
+
+div#grid-container {
+    margin: 0 auto;
+    width: 650px;
+    height: 650px;
+}
+
+div.square {
+    float: left;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+div.square3 {
+    float: left;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+div.square2 {
+    float: left;
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+div.square1 {
+    float: left;
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+div#grid-container,
+div.square3,
+div.square2,
+div.square1 {
+    border: 3px white solid;
+}
+
+div.square1.cyaned,
+div.square2.cyaned,
+div.square3.cyaned {
+    background-color: #7fffd4;
+    color: #011627;
+}
+
+div.square1.redned,
+div.square2.redned,
+div.square3.redned {
+    background-color: #ff008c;
+    color: #011627;
+}
+
+.clearfix::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.form-group {
+    width: 200px;
+}
