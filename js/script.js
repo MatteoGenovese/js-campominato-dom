@@ -6,6 +6,7 @@ const generatorButton = document.getElementById('generator');
 
 let movesDone = 1;
 let bombNumber = 16;
+let isGameOver = false;
 
 generateGrid(1);
 
@@ -25,24 +26,24 @@ function generateBombs(numberOfSquares, start) {
 
     const gridContainer = document.getElementById('grid-container');
 
-    let bombList = [];
+    let bombsList = [];
     let newRandomNumber;
     let i = 0;
 
     // finché il numero trovato non è valido
-    while (bombList.length < bombNumber) {
+    while (bombsList.length < bombNumber) {
         // genera un nuovo numero randomico nell'intervallo min-max
         newRandomNumber = Math.floor(Math.random() * (numberOfSquares + 1) - start) + start;
 
         // se non è già presente in blacklist || ovvero che il numero è nuovo e valido
-        if (!bombList.includes(newRandomNumber)) {
+        if (!bombsList.includes(newRandomNumber)) {
             // usciamo dal ciclo
-            bombList[i] = newRandomNumber;
+            bombsList[i] = newRandomNumber;
             i++;
         }
     }
 
-    return bombList;
+    return bombsList;
 
 }
 
@@ -53,7 +54,7 @@ function generateGrid(difficultyValue) { // | ciclo per il numero di quadrati ch
     const message = document.getElementById('message');
     message.innerHTML = ``;
     const gridContainer = document.getElementById('grid-container');
-    let bombList = []; // | creo una lista vuota, che sarà la lista delle bombe ritornate
+    let bombsList = []; // | creo una lista vuota, che sarà la lista delle bombe ritornate
     switch (getSelectValue()) {
         default: numberOfSquares = 100;
         case '1':
@@ -66,11 +67,11 @@ function generateGrid(difficultyValue) { // | ciclo per il numero di quadrati ch
                 numberOfSquares = 49;
             break;
     }
-    bombList = generateBombs(numberOfSquares, 0);
+    bombsList = generateBombs(numberOfSquares, 0);
 
     for (let i = 0; i < numberOfSquares; i++) {
         const newSquare = createNewSquare(difficultyValue); // # creo un nuovo quadrato con le classi relative
-        let squareValue = (bombList.includes(i)) ? 'bomb' : i;
+        let squareValue = (bombsList.includes(i)) ? 'bomb' : i;
         newSquare.innerHTML = squareValue;
         let className = (squareValue === 'bomb') ? 'bombed' : 'cyaned'; // ! in base al valore di parità del numero randomico unico appena generato assegnerò un toggle con classi diverse
         addEventListenerWithToggle(newSquare, className, i);
@@ -82,9 +83,10 @@ function checkIfYouHaveClickedABomb(element) { // | ciclo per il numero di quadr
 
     console.log(movesDone)
     const message = document.getElementById('message');
-    if (element.classList.contains('bombed'))
+    if (element.classList.contains('bombed')) {
         message.innerHTML = `Hai perso dopo ${movesDone} click`;
-    else {
+        isGameOver = true;
+    } else {
         if (isAlreadyClicked(element) == false) {
             if ((getSelectValue() == '1' && movesDone == (100 - bombNumber)) || (getSelectValue() == '2' && movesDone == (81 - bombNumber)) || (getSelectValue() == '3' && movesDone == (49 - bombNumber))) {
                 message.innerHTML = `Hai vinto`;
@@ -108,9 +110,11 @@ function isAlreadyClicked(element) {
 
 function addEventListenerWithToggle(htmlElement, classToToggle, cellNumber) {
     htmlElement.addEventListener('click', function() {
-        htmlElement.classList.toggle(classToToggle);
-        checkIfYouHaveClickedABomb(htmlElement);
-
+        if (isGameOver == false) {
+            htmlElement.classList.toggle(classToToggle);
+            checkIfYouHaveClickedABomb(htmlElement);
+        } else
+            console.log("Game finito");
     });
 }
 
